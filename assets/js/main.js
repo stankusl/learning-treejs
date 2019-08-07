@@ -2,6 +2,9 @@ function init() {
 
     let scene = new THREE.Scene();
 
+    // Import GUI
+    const gui = new dat.GUI();
+
     const isFog = false;
 
     if (isFog) {
@@ -18,9 +21,13 @@ function init() {
     let sphere = getSphere(0.05);
 
     let pointLight = getPointLight(1);
-    pointLight.position.y = 1.95;
-    pointLight.position.x = 0.5;
-    pointLight.position.z = 2;
+    pointLight.position.y = 1.5;
+    pointLight.position.x = 0;
+    pointLight.position.z = 0;
+
+    // ================== GUI CONTROLLERS
+    gui.add(pointLight, 'intensity', 0, 10);
+
 
     scene.add(box);
     scene.add(plane);
@@ -50,7 +57,7 @@ function init() {
     update(renderer, scene, camera);
 
     return scene;
-   
+
 }
 
 function getPointLight( intensity ) {

@@ -1,0 +1,21 @@
+{
+  "name": "learning-treejs",
+  "version": "1.0.0",
+  "description": "This is learning excercise for ThreeJS. Covering basic shapes, lighting, render cycle useful tool and libraries.",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ls"
+  },
+  "keywords": [
+    "learning"
+  ],
+  "author": "Luke Stankus",
+  "license": "MIT",
+  "dependencies": {
+    "dat.gui": "^0.7.6"
+  }
+}
