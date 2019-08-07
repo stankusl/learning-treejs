@@ -74,9 +74,9 @@ function update(renderer, scene, camera) {
         camera
     );
 
-    let plane = scene.getObjectByName('plane-1');
-    plane.rotation.y += 0.01;
-    plane.rotation.z += 0.01;
+    // let plane = scene.getObjectByName('plane-1');
+    // plane.rotation.y += 0.01;
+    // plane.rotation.z += 0.01;
 
     requestAnimationFrame( function() {
         update(renderer, scene, camera)
