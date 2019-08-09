@@ -2,6 +2,9 @@ function init() {
 
     let scene = new THREE.Scene();
 
+    // Import Orbit controls
+    // const orbit = new THREE
+
     // Import GUI
     const gui = new dat.GUI();
 
@@ -27,6 +30,7 @@ function init() {
 
     // ================== GUI CONTROLLERS
     gui.add(pointLight, 'intensity', 0, 10);
+    gui.add(pointLight.position, 'y', 0, 10);
 
 
     scene.add(box);
@@ -51,10 +55,13 @@ function init() {
 
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setClearColor('rgb(120,120,120)');
+    renderer.shadowMap.enabled = true;
 
     document.getElementById('webgl').appendChild(renderer.domElement);
 
-    update(renderer, scene, camera);
+    let controls = new THREE.OrbitControls(camera, renderer.domElement );
+
+    update(renderer, scene, camera, controls);
 
     return scene;
 
@@ -69,7 +76,7 @@ function getPointLight( intensity ) {
 function getPlane(w) {
     let geometry = new THREE.PlaneGeometry(w, w);
     let material = new THREE.MeshPhongMaterial( {
-        color: 'grb(120,120,120)',
+        color: 'rgb(120,120,120)',
         side: THREE.DoubleSide
     });
 
@@ -104,18 +111,20 @@ function getBox(w,h,d) {
     );
 }
 
-function update(renderer, scene, camera) {
+function update(renderer, scene, camera, controls) {
     renderer.render(
         scene,
         camera
     );
+
+    controls.update();
 
     // let plane = scene.getObjectByName('plane-1');
     // plane.rotation.y += 0.01;
     // plane.rotation.z += 0.01;
 
     requestAnimationFrame( function() {
-        update(renderer, scene, camera)
+        update(renderer, scene, camera, controls)
     })
 }
 
