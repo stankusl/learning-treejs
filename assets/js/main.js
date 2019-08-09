@@ -14,10 +14,11 @@ function init() {
         scene.fog = new THREE.FogExp2(0xffffff, 0.2);
     }
 
-    let box = getBox(1,1,1);
-    box.position.y = .5;
+    let boxGrid = getBoxGrid(10, 1.5);
+    // let box = getBox(1,1,1);
+    // box.position.y = .5;
 
-    let plane = getPlane(8);
+    let plane = getPlane(20);
     plane.name = 'plane-1';
     plane.rotation.x = (Math.PI / 2);
 
@@ -33,10 +34,12 @@ function init() {
     gui.add(pointLight.position, 'y', 0, 10);
 
 
-    scene.add(box);
+    // scene.add(box);
     scene.add(plane);
     pointLight.add(sphere);
     scene.add(pointLight);
+    scene.add(boxGrid);
+    
 
     let camera = new THREE.PerspectiveCamera(
         45,
@@ -65,6 +68,31 @@ function init() {
 
     return scene;
 
+}
+
+function getBoxGrid(amount, separationMultiplier)  {
+    let group = new THREE.Group();
+
+    for (let i = 0; i < amount; i++ ) {
+        let obj = getBox(1, 1, 1);
+        obj.position.x = i * separationMultiplier;
+        obj.position.y = obj.geometry.parameters.height / 2;
+        group.add(obj);
+
+        for (let j = 1; j < amount; j++ ) {
+            let obj = getBox(1, 1, 1);
+            obj.position.x = i * separationMultiplier;
+            obj.position.y = obj.geometry.parameters.height / 2;
+            obj.position.z = j * separationMultiplier;
+            group.add(obj);
+
+        }
+    }
+
+    group.position.x = -(separationMultiplier * (amount-1))/2;
+    group.position.z = -(separationMultiplier * (amount-1))/2;
+
+    return group;
 }
 
 function getPointLight( intensity ) {
