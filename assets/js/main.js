@@ -69,6 +69,7 @@ function init() {
 
 function getPointLight( intensity ) {
     let light = new THREE.PointLight(0xffffff, intensity);
+    light.castShadow = true;
 
     return light;
 }
@@ -80,10 +81,14 @@ function getPlane(w) {
         side: THREE.DoubleSide
     });
 
-    return mesh = new THREE.Mesh(
+    let mesh = new THREE.Mesh(
         geometry,
         material
     );
+
+    mesh.receiveShadow = true;
+
+    return mesh;
 }
 
 function getSphere(r) {
@@ -105,10 +110,14 @@ function getBox(w,h,d) {
         color: 'grb(120,120,120)',
     });
 
-    return mesh = new THREE.Mesh(
+    let mesh = new THREE.Mesh(
         geometry,
         material
     );
+
+    mesh.castShadow = true;
+
+    return mesh;
 }
 
 function update(renderer, scene, camera, controls) {
